@@ -25,18 +25,18 @@ requirements:
           FILTER="$5"
           BAM_BASE="$6"
 
-          /usr/bin/python /usr/local/bin/cnvkit.py \
+          /usr/bin/python3 /usr/local/bin/cnvkit.py \
           batch $BAM \
           -m $METHOD \
           --reference $REFERENCE_CNN
 
           mv $BAM_BASE.cnr $SAMPLE.cnr
 
-          /usr/bin/python /usr/local/bin/cnvkit.py call \
+          /usr/bin/python3 /usr/local/bin/cnvkit.py call \
           $BAM_BASE.cns -o $SAMPLE.call.cns \
           --filter $FILTER
 
-          /usr/bin/python /usr/local/bin/cnvkit.py export vcf \
+          /usr/bin/python3 /usr/local/bin/cnvkit.py export vcf \
           $SAMPLE.call.cns -i $SAMPLE \
           -o $SAMPLE.cnvkit.vcf
 
