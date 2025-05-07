@@ -30,7 +30,9 @@ requirements:
           -m $METHOD \
           --reference $REFERENCE_CNN
 
-          mv $BAM_BASE.cnr $SAMPLE.cnr
+          if [[ "$BAM_BASE" != "$SAMPLE" ]]; then
+            mv $BAM_BASE.cnr $SAMPLE.cnr
+          fi
 
           /usr/bin/python3 /usr/local/bin/cnvkit.py call \
           $BAM_BASE.cns -o $SAMPLE.call.cns \
