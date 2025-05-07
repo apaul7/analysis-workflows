@@ -28,7 +28,7 @@ requirements:
             filter_expression="((AS >= $split_count) && (AP >= $paired_count) && ((AP+AS) / (AP+RP+AS+RS) >= $abundance))"
           elif [ "$vcf_source" ==  "manta" ]; then
             echo "Running filter for manta vcf"
-            filter_expression="((SR[0:*]=\".\" || (SR[0:1] >= $split_count)) && (PR[0:1] >= $paired_count) && ((SR[0:*]=\".\" && (PR[0:1] / (PR[0:0]+PR[0:1]) >= $abundance))|| ((SR[0:1]+PR[0:1]) / (SR[0:0]+SR[0:1]+PR[0:1]+PR[0:0]) >= $abundance)))"
+            filter_expression="((SR[*:*]=\".\" || (SR[*:1] >= $split_count)) && (PR[*:1] >= $paired_count) && ((SR[*:*]=\".\" && (PR[*:1] / (PR[*:0]+PR[*:1]) >= $abundance))|| ((SR[*:1]+PR[*:1]) / (SR[*:0]+SR[*:1]+PR[*:1]+PR[*:0]) >= $abundance)))"
           else
             echo "vcf source: '$vcf_source' is not supported for SV filtering"
             exit 1
