@@ -7,7 +7,7 @@ label: "runs expansion hunter denovo to generate STR profiles"
 baseCommand: ["/opt/ExpansionHunterDenovo/bin/ExpansionHunterDenovo", "profile"]
 requirements:
     - class: ResourceRequirement
-      ramMin: 4000
+      ramMin: 15000
     - class: DockerRequirement
       dockerPull: "apaul7/docker-expansion-hunter-denovo:v0.9.0"
 
