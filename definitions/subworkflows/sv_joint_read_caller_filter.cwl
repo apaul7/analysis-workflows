@@ -18,7 +18,7 @@ inputs:
         type: string[]
     bams:
         type: File[]
-        secondaryFiles: [^.bai]
+        secondaryFiles: ${if (self.nameext === ".bam") {return self.basename + ".bai"} else {return self.basename + ".crai"}}
     snps_vcf:
         type: File
         secondaryFiles: [.tbi]
