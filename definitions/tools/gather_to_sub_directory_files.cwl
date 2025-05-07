@@ -36,14 +36,18 @@ inputs:
         type: File[]?
         inputBinding:
             position: 3
-    file1:
+    file1_opt:
         type: File?
         inputBinding:
             position: 4
+    file2_opt:
+        type: File?
+        inputBinding:
+            position: 5
     directory:
         type: Directory?
         inputBinding:
-            position: 5
+            position: 6
 outputs:
     gathered_directory:
         type: Directory

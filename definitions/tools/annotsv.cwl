@@ -48,6 +48,6 @@ outputs:
         outputBinding:
             glob: "$(inputs.output_base).tsv"
     unannotated_tsv:
-        type: File
+        type: File?
         outputBinding:
             glob: "$(inputs.output_base).unannotated.tsv"

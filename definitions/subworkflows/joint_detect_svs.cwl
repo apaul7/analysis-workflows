@@ -353,8 +353,10 @@ steps:
             outdir:
                 default: "merged"
             files:
-                source: [merge_calls/survivor, merge_calls/bcftools, survivor_add_counts/tsv, survivor_add_counts_no_cds/tsv, annotate_survivor/tsv, annotate_survivor/unannotated_tsv, annotate_survivor/filtered_tsv, annotate_survivor/filtered_tsv_no_CDS, annotate_bcftools/tsv, annotate_bcftools/unannotated_tsv, annotate_bcftools/filtered_tsv, annotate_bcftools/filtered_tsv_no_CDS]
+                source: [merge_calls/survivor, merge_calls/bcftools, survivor_add_counts/tsv, survivor_add_counts_no_cds/tsv, annotate_survivor/tsv, annotate_survivor/filtered_tsv, annotate_survivor/filtered_tsv_no_CDS, annotate_bcftools/tsv, annotate_bcftools/filtered_tsv, annotate_bcftools/filtered_tsv_no_CDS]
                 linkMerge: merge_flattened
+            file1_opt: annotate_survivor/unannotated_tsv
+            file2_opt: annotate_bcftools/unannotated_tsv
         out:
             [gathered_directory]
     gather_all:

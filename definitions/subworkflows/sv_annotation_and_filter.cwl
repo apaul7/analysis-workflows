@@ -31,7 +31,7 @@ outputs:
         type: File
         outputSource: annotsv/annotated_tsv
     unannotated_tsv:
-        type: File
+        type: File?
         outputSource: annotsv/unannotated_tsv
     filtered_tsv:
         type: File
