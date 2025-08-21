@@ -58,6 +58,12 @@ inputs:
             prefix: "--variant:docm"
             position: 7
         secondaryFiles: [.tbi]
+    deepsomatic_vcf:
+        type: File?
+        inputBinding:
+            prefix: "--variant:deepsomatic"
+            position: 7
+        secondaryFiles: [.tbi]
 outputs:
     combined_vcf:
         type: File

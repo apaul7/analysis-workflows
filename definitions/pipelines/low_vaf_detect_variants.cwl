@@ -122,6 +122,16 @@ outputs:
     tumor_indel_bam_readcount_tsv:
         type: File
         outputSource: bam_readcount/indel_bam_readcount_tsv
+    deepsomatic_vcf:
+        type: File
+        outputSource: deepsomatic/filtered_vcf
+    deepsomatic_raw_vcf:
+        type: File
+        outputSource: deepsomatic/unfiltered_vcf
+        secondaryFiles: [.tbi]
+    deepsomatic_gvcf:
+        type: File
+        outputSource: deepsomatic/gvcf
 steps:
     varscan:
         run: ../subworkflows/varscan_germline.cwl
@@ -156,15 +166,30 @@ steps:
             tumor_sample_name: sample_name
         out:
             [unfiltered_vcf, filtered_vcf]
+    deepsomatic:
+        run: ../subworkflows/deepsomatic.cwl
+        in:
+            reference: reference
+            tumor_bam: bam
+            tumor_sample_name: sample_name
+            model_type:
+                default: "WES_TUMOR_ONLY"
+            pon_filter:
+                default: true
+            output_base:
+                default: "deepsomatic"
+        out:
+            [gvcf, unfiltered_vcf, filtered_vcf]
     combine_variants:
         run: ../tools/general_combine_variants.cwl
         in:
             reference: reference
             rod_priority_list:
-                default: ["mutect","varscan","docm"]
+                default: ["mutect","deepsomatic","varscan","docm"]
             mutect_vcf: mutect/filtered_vcf
             varscan_vcf: varscan/filtered_vcf
             docm_vcf: docm/filtered_vcf
+            deepsomatic_vcf: deepsomatic/filtered_vcf
         out:
             [combined_vcf]
     decompose:
