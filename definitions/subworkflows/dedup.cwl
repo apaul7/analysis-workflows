@@ -57,10 +57,10 @@ outputs:
         outputSource: dedup/stats_per_umi_per_position
 
     insert_size_metrics:
-        type: File
+        type: File?
         outputSource: qc/insert_size_metrics
     insert_size_histogram:
-        type: File
+        type: File?
         outputSource: qc/insert_size_histogram
     alignment_summary_metrics:
         type: File

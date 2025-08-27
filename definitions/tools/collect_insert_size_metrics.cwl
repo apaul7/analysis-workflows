@@ -31,10 +31,10 @@ inputs:
             prefix: "METRIC_ACCUMULATION_LEVEL="
 outputs:
     insert_size_metrics:
-        type: File
+        type: File?
         outputBinding:
             glob: "$(inputs.bam.nameroot).InsertSizeMetrics.txt"
     insert_size_histogram:
-        type: File
+        type: File?
         outputBinding:
             glob: "$(inputs.bam.nameroot).InsertSizeHistogram.pdf"
