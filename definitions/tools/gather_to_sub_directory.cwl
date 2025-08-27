@@ -32,17 +32,6 @@ inputs:
         type: File[]
         inputBinding:
             position: 2
-    files_files:
-        type:
-          - "null"
-          - type: array
-            items:
-              type: array
-              items:
-                - "null"
-                - File
-        inputBinding:
-            position: 3
 outputs:
     gathered_directory:
         type: Directory

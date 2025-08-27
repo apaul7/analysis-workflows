@@ -150,16 +150,84 @@ outputs:
     dedup_stats_per_umi_per_position:
         type: File
         outputSource: dedup/stats_per_umi_per_position
+
     mark_duplicates_metrics:
         type: File
         outputSource: alignment_and_qc/mark_duplicates_metrics
+    insert_size_metrics:
+        type: File
+        outputSource: alignment_and_qc/insert_size_metrics
+    insert_size_histogram:
+        type: File
+        outputSource: alignment_and_qc/insert_size_histogram
+    alignment_summary_metrics:
+        type: File
+        outputSource: alignment_and_qc/alignment_summary_metrics
+    hs_metrics:
+        type: File
+        outputSource: alignment_and_qc/hs_metrics
+    per_target_coverage_metrics:
+        type: File[]
+        outputSource: alignment_and_qc/per_target_coverage_metrics
+    per_target_hs_metrics:
+        type: File[]
+        outputSource: alignment_and_qc/per_target_hs_metrics
+    per_base_coverage_metrics:
+        type: File[]
+        outputSource: alignment_and_qc/per_base_coverage_metrics
+    per_base_hs_metrics:
+        type: File[]
+        outputSource: alignment_and_qc/per_base_hs_metrics
+    summary_hs_metrics:
+        type: File[]
+        outputSource: alignment_and_qc/summary_hs_metrics
+    flagstats:
+        type: File
+        outputSource: alignment_and_qc/flagstats
+    verify_bam_id_metrics:
+        type: File
+        outputSource: alignment_and_qc/verify_bam_id_metrics
+    verify_bam_id_depth:
+        type: File
+        outputSource: alignment_and_qc/verify_bam_id_depth
 
-    qc_dir:
-        type: Directory
-        outputSource: gather_qc/gathered_directory
-    dedup_qc_dir:
-        type: Directory
-        outputSource: gather_dedup_qc/gathered_directory
+    dedup_insert_size_metrics:
+        type: File
+        outputSource: dedup/insert_size_metrics
+    dedup_insert_size_histogram:
+        type: File?
+        outputSource: dedup/insert_size_histogram
+    dedup_alignment_summary_metrics:
+        type: File?
+        outputSource: dedup/alignment_summary_metrics
+    dedup_hs_metrics:
+        type: File
+        outputSource: dedup/hs_metrics
+    dedup_per_target_coverage_metrics:
+        type: File[]
+        outputSource: dedup/per_target_coverage_metrics
+    dedup_per_target_hs_metrics:
+        type: File[]
+        outputSource: dedup/per_target_hs_metrics
+    dedup_per_base_coverage_metrics:
+        type: File[]
+        outputSource: dedup/per_base_coverage_metrics
+    dedup_per_base_hs_metrics:
+        type: File[]
+        outputSource: dedup/per_base_hs_metrics
+    dedup_summary_hs_metrics:
+        type: File[]
+        outputSource: dedup/summary_hs_metrics
+    dedup_flagstats:
+        type: File
+        outputSource: dedup/flagstats
+    dedup_verify_bam_id_metrics:
+        type: File
+        outputSource: dedup/verify_bam_id_metrics
+    dedup_verify_bam_id_depth:
+        type: File
+        outputSource: dedup/verify_bam_id_depth
+
     variants:
         type: Directory
         outputSource: gather_detect_variants/gathered_directory
@@ -267,30 +335,6 @@ steps:
             readcount_minimum_base_quality: readcount_minimum_base_quality
         out:
             [mutect_vcf, varscan_vcf, docm_gatk_vcf, deepsomatic_vcf, deepsomatic_raw_vcf, deepsomatic_gvcf, annotated_vcf, final_vcf, final_tsv, vep_summary, tumor_snv_bam_readcount_tsv, tumor_indel_bam_readcount_tsv]
-    gather_qc:
-        run: ../tools/gather_to_sub_directory.cwl
-        in:
-            outdir:
-                default: "qc"
-            files:
-                source: [alignment_and_qc/insert_size_metrics, alignment_and_qc/insert_size_histogram, alignment_and_qc/alignment_summary_metrics, alignment_and_qc/flagstats, alignment_and_qc/verify_bam_id_metrics, alignment_and_qc/verify_bam_id_depth]
-                linkMerge: merge_flattened
-            files_files:
-                source: [alignment_and_qc/per_target_coverage_metrics, alignment_and_qc/per_target_hs_metrics, alignment_and_qc/per_base_coverage_metrics, alignment_and_qc/per_base_hs_metrics, alignment_and_qc/summary_hs_metrics]
-        out:
-            [gathered_directory]
-    gather_dedup_qc:
-        run: ../tools/gather_to_sub_directory.cwl
-        in:
-            outdir:
-                default: "dedup_qc"
-            files:
-                source: [dedup/insert_size_metrics, dedup/insert_size_histogram, dedup/alignment_summary_metrics, dedup/flagstats, dedup/verify_bam_id_metrics, dedup/verify_bam_id_depth]
-                linkMerge: merge_flattened
-            files_files:
-                source: [dedup/per_target_coverage_metrics, dedup/per_target_hs_metrics, dedup/per_base_coverage_metrics, dedup/per_base_hs_metrics, dedup/summary_hs_metrics]
-        out:
-            [gathered_directory]
     gather_dedup_detect_variants:
         run: ../tools/gather_to_sub_directory.cwl
         in:
